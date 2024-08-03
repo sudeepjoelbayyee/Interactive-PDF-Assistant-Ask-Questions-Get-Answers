@@ -1,74 +1,105 @@
-# Interactive PDF Assistant: Ask Questions, Get Answers
+# Interactive Document Q&A Chatbot
 
 ## Overview
 
-The Interactive PDF Assistant allows users to upload PDF documents and ask questions based on the content of these documents. The application uses advanced AI models to generate accurate and context-aware responses, making it a powerful tool for extracting information from large documents quickly and efficiently.
+This project provides an interactive document Q&A chatbot that allows users to upload PDF documents, which are then processed to create vector embeddings. Once the embeddings are ready, users can ask questions related to the content of the uploaded document. The application is built with Flask and leverages several libraries for document processing and natural language understanding.
 
 ## Features
 
-- **PDF Upload**: Users can upload their own PDF files to the platform.
-- **Question and Answer**: Ask questions related to the content of the uploaded PDF and get precise answers.
-- **AI-Powered**: Utilizes state-of-the-art AI models to understand and extract relevant information.
-- **Fast and Accurate**: Quick response times with high accuracy, suitable for various use cases.
+- **PDF Upload**: Upload a PDF document for processing.
+- **Vector Embeddings Creation**: Convert the document into vector embeddings using Google Generative AI.
+- **Question Answering**: Ask questions about the content of the processed document.
+- **Loading Indicator**: Visual feedback during PDF processing.
+- **Flash Messages**: Notifications for various actions and errors.
 
-## How It Works
+## Requirements
 
-1. **Upload a PDF**: Start by uploading a PDF document using the file uploader.
-2. **Create Vector Store**: The document is processed to create vector embeddings, enabling efficient information retrieval.
-3. **Ask Questions**: Enter your question in the text input field. The AI model will retrieve relevant information from the document and provide an answer.
+- Python 3.12
+- Flask
+- werkzeug
+- langchain_groq
+- langchain
+- langchain_core
+- langchain_community
+- langchain_google_genai
+- dotenv
+- faiss-cpu
+- PyPDF2
 
 ## Installation
 
-To run the project locally, follow these steps:
+1. Clone the repository:
 
-1. **Clone the Repository**:
-
-    ```sh
-    git clone https://github.com/your-username/interactive-pdf-assistant.git
-    cd interactive-pdf-assistant
+    ```bash
+    git clone https://github.com/yourusername/your-repo.git
+    cd your-repo
     ```
 
-2. **Create a Virtual Environment**:
+2. Create a virtual environment and activate it:
 
-    ```sh
+    ```bash
     python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
 
-3. **Install Dependencies**:
+3. Install the required packages:
 
-    ```sh
+    ```bash
     pip install -r requirements.txt
     ```
 
-4. **Set Up Environment Variables**:
+4. Create a `.env` file in the project root directory and add your API keys:
 
-    Create a `.env` file in the root directory of the project and add your API keys:
-
-    ```
+    ```ini
     GROQ_API_KEY=your_groq_api_key
     GOOGLE_API_KEY=your_google_api_key
     ```
 
-5. **Run the Application**:
-
-    ```sh
-    streamlit run app.py
-    ```
-
-    The app will be accessible at `http://localhost:8501`.
-
 ## Usage
 
-1. **Upload a PDF**: Click on the file uploader to select a PDF document from your local system.
-2. **Create Vector Store**: Click the "Create Vector Store from Uploaded PDF" button to process the document.
-3. **Ask a Question**: Once the vector store is ready, enter your question in the text input field and get the answer.
+1. Run the Flask application:
 
-## Technologies Used
+    ```bash
+    python app.py
+    ```
 
-- **Python**: The main programming language used.
-- **Streamlit**: For creating the interactive web application.
-- **Langchain**: For text splitting, document retrieval, and chain management.
-- **Groq API**: For language model generation.
-- **Google Generative AI**: For generating embeddings.
-- **FAISS**: For efficient similarity search and clustering of the vector embeddings.
+2. Open your web browser and go to `http://127.0.0.1:5000/`.
+
+3. Upload a PDF document, and once processed, you will be able to ask questions about the document content.
+
+## API Endpoints
+
+- `POST /upload`
+  - **Description**: Upload a PDF document for processing.
+  - **Request**: Form-data with a `file` field (PDF file).
+  - **Response**: JSON message indicating success or failure.
+
+- `POST /ask`
+  - **Description**: Ask a question related to the uploaded document.
+  - **Request**: Form-data with a `question` field (text).
+  - **Response**: Rendered HTML with the answer to the question.
+
+## Development
+
+### Directory Structure
+
+- `app.py`: Main application file with Flask routes and logic.
+- `templates/`: HTML templates for rendering the frontend.
+- `static/`: Static files such as CSS and JavaScript.
+
+### Notes
+
+- Make sure the `uploads` directory exists or is created automatically by the application.
+- Ensure that your `.env` file contains the correct API keys for accessing the models.
+
+## Contributing
+
+Feel free to submit issues and pull requests to contribute to this project.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or comments, please contact [your-email@example.com](mailto:your-email@example.com).
