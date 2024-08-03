@@ -1,105 +1,66 @@
 # Interactive Document Q&A Chatbot
 
-## Overview
-
-This project provides an interactive document Q&A chatbot that allows users to upload PDF documents, which are then processed to create vector embeddings. Once the embeddings are ready, users can ask questions related to the content of the uploaded document. The application is built with Flask and leverages several libraries for document processing and natural language understanding.
+This project implements a web-based Q&A chatbot using Retrieval-Augmented Generation (RAG). Users can upload PDF documents, which are then processed to create vector embeddings. Once the embeddings are created, users can ask questions based on the content of the uploaded document.
 
 ## Features
 
-- **PDF Upload**: Upload a PDF document for processing.
-- **Vector Embeddings Creation**: Convert the document into vector embeddings using Google Generative AI.
-- **Question Answering**: Ask questions about the content of the processed document.
-- **Loading Indicator**: Visual feedback during PDF processing.
-- **Flash Messages**: Notifications for various actions and errors.
+- **PDF Upload:** Upload PDF documents for processing.
+- **Vector Embeddings:** Create vector embeddings using Google Generative AI.
+- **RAG Model:** Uses Retrieval-Augmented Generation (RAG) to answer questions based on document content.
+- **Progress Indicator:** Visual feedback during document processing.
+- **Responsive Design:** User-friendly interface with Bootstrap.
 
-## Requirements
+## Technologies Used
 
-- Python 3.12
-- Flask
-- werkzeug
-- langchain_groq
-- langchain
-- langchain_core
-- langchain_community
-- langchain_google_genai
-- dotenv
-- faiss-cpu
-- PyPDF2
+- **Flask:** Web framework for Python.
+- **LangChain:** For document processing and vector embeddings.
+- **Google Generative AI:** For generating embeddings.
+- **FAISS:** For efficient similarity search.
+- **Bootstrap:** For responsive web design.
+- **HTML/CSS/JavaScript:** For front-end development.
 
-## Installation
+## Setup and Installation
 
-1. Clone the repository:
+1. **Clone the Repository:**
 
     ```bash
-    git clone https://github.com/yourusername/your-repo.git
-    cd your-repo
+    git clone https://github.com/sudeepjoelbayyee/Interactive-PDF-Assistant-Ask-Questions-Get-Answers.git
     ```
 
-2. Create a virtual environment and activate it:
+2. **Navigate to the Project Directory:**
+
+    ```bash
+    cd interactive-document-qa-chatbot
+    ```
+
+3. **Create a Virtual Environment:**
 
     ```bash
     python -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
 
-3. Install the required packages:
+4. **Install Dependencies:**
 
     ```bash
     pip install -r requirements.txt
     ```
 
-4. Create a `.env` file in the project root directory and add your API keys:
+5. **Set Up Environment Variables:**
 
-    ```ini
-    GROQ_API_KEY=your_groq_api_key
+    Create a `.env` file in the project root with the following content:
+
+    ```plaintext
     GOOGLE_API_KEY=your_google_api_key
+    GROQ_API_KEY=your_groq_api_key
     ```
 
-## Usage
-
-1. Run the Flask application:
+6. **Run the Application:**
 
     ```bash
     python app.py
     ```
 
-2. Open your web browser and go to `http://127.0.0.1:5000/`.
+7. **Access the Application:**
 
-3. Upload a PDF document, and once processed, you will be able to ask questions about the document content.
-
-## API Endpoints
-
-- `POST /upload`
-  - **Description**: Upload a PDF document for processing.
-  - **Request**: Form-data with a `file` field (PDF file).
-  - **Response**: JSON message indicating success or failure.
-
-- `POST /ask`
-  - **Description**: Ask a question related to the uploaded document.
-  - **Request**: Form-data with a `question` field (text).
-  - **Response**: Rendered HTML with the answer to the question.
-
-## Development
-
-### Directory Structure
-
-- `app.py`: Main application file with Flask routes and logic.
-- `templates/`: HTML templates for rendering the frontend.
-- `static/`: Static files such as CSS and JavaScript.
-
-### Notes
-
-- Make sure the `uploads` directory exists or is created automatically by the application.
-- Ensure that your `.env` file contains the correct API keys for accessing the models.
-
-## Contributing
-
-Feel free to submit issues and pull requests to contribute to this project.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For any questions or comments, please contact [your-email@example.com](mailto:your-email@example.com).
+    Open your browser and go to `http://localhost:5000`.
