@@ -1,0 +1,20 @@
+streamlit
+langchain
+langchain-groq
+langchain-community
+python-dotenv
+bs4
+faiss-cpu
+groq
+PyPDF2
+langchain-google-genai
+<<<<<<< HEAD
+pypdf
+=======
+pypdf
+flask
+werkzeug
+joblib
+flask-session
+gunicorn
+>>>>>>> 225d89e2c9fdec32d4467878fa10045e46a1acbd

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Document Q&A Chatbot</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="card shadow-lg">
+      <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">Interactive Document Q&A Chatbot</h3>
+      </div>
+      <div class="card-body">
+        <form id="uploadForm" action="{{ url_for('index') }}" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="file">Upload PDF Document</label>
+            <input type="file" class="form-control-file" id="file" name="file" accept=".pdf" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Process the PDF</button>
+
+          <!-- Spinner -->
+          <div id="spinner" class="d-none mt-3">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <div class="text-center mt-2">Processing...</div>
+          </div>
+
+          <!-- Flash Messages -->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              <div class="alert alert-dismissible fade show mt-3" role="alert">
+                <strong>{{ messages[0][1] }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endif %}
+          {% endwith %}
+        </form>
+
+        <hr class="my-4">
+
+        <!-- Only display the question form if vectors are ready -->
+        {% if session.get('vectors_ready') %}
+        <form action="{{ url_for('ask') }}" method="post">
+          <div class="form-group">
+            <label for="question">Ask a Question</label>
+            <input type="text" class="form-control" id="question" name="question" placeholder="Enter your question..." required>
+          </div>
+          <button type="submit" class="btn btn-success btn-block">Get Answer</button>
+        </form>
+        {% endif %}
+
+        <!-- Display the answer if available -->
+        {% if answer %}
+        <div class="mt-4">
+          <h5 class="text-info">Answer:</h5>
+          <div class="alert alert-info" role="alert">
+            {{ answer | safe }}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+  <script>
+    $(document).ready(function() {
+      $('#uploadForm').submit(function(event) {
+        $('#spinner').removeClass('d-none'); // Show spinner
+      });
+    });
+  </script>
+</body>
+</html>
